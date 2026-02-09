@@ -40,7 +40,7 @@ void SelectFile(HWND hWnd, wchar_t* path, HWND hEdit) {
 // 合并逻辑
 void DoMerge(HWND hWnd) {
     if (wcslen(path1) == 0 || wcslen(path2) == 0) {
-        MessageBoxW(hWnd, L"请先选择两个文件！", L"提示", MB_OK | MB_ICONWARNING);
+        MessageBoxW(hWnd, L"请先选择两个bin文件！", L"提示", MB_OK | MB_ICONWARNING);
         return;
     }
 
@@ -120,7 +120,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR lpCmd, int nShow) {
     wc.lpszClassName = L"BinMergerClass";
     RegisterClassW(&wc);
 
-    HWND hWnd = CreateWindowW(wc.lpszClassName, L"固件合并工具 (4KB对齐)", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 430, 240, NULL, NULL, hInst, NULL);
+    HWND hWnd = CreateWindowW(wc.lpszClassName, L"bin文件合并工具 (4KB对齐)", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 430, 240, NULL, NULL, hInst, NULL);
 
     MSG msg;
     while (GetMessageW(&msg, NULL, 0, 0)) {
