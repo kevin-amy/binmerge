@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1769392555 source:c:\kevin\13mcu\06tool\binmerge\main.cpp
+	<windows.h>
+	<commdlg.h>
+	<stdio.h>
+
+1769392555 source:c:\kevin\13mcu\06tool\00git\binmerge\main.cpp
+	<windows.h>
+	<commdlg.h>
+	<stdio.h>
+
