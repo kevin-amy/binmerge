@@ -112,7 +112,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     return 0;
 }
 
-int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR lpCmd, int nShow) {
+int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, PWSTR lpCmd, int nShow) {
     WNDCLASSW wc = {0}; // 使用 WNDCLASSW
     wc.lpfnWndProc = WndProc;
     wc.hInstance = hInst;
