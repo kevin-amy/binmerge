@@ -1,0 +1,53 @@
+# Makefile for BinMerger - Windows cross-compilation on Linux
+# This makefile builds a Windows executable using MinGW-w64
+
+CC = x86_64-w64-mingw32-gcc
+CXX = x86_64-w64-mingw32-g++
+WINDRES = x86_64-w64-mingw32-windres
+CFLAGS = -Wall -O2 -fexec-charset=GBK -finput-charset=UTF-8 -municode -DUNICODE -D_UNICODE
+CXXFLAGS = $(CFLAGS)
+LDFLAGS = -s -mwindows -municode -Wl,--subsystem,windows -static-libgcc -static-libstdc++
+LIBS = -lmingw32 -lgdi32 -luser32 -lcomdlg32
+
+# Directories
+SRC = .
+OBJ_DIR = obj/Release
+BIN_DIR = bin/Release
+TARGET = $(BIN_DIR)/BinMerger.exe
+
+# Source files
+SOURCES = main.cpp
+OBJECTS = $(addprefix $(OBJ_DIR)/,$(SOURCES:.cpp=.o))
+
+# Default target
+all: $(BIN_DIR) $(OBJ_DIR) $(TARGET)
+
+# Create directories
+$(BIN_DIR) $(OBJ_DIR):
+	@mkdir -p $@
+
+# Link executable
+$(TARGET): $(OBJECTS)
+	@echo "Linking $@..."
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
+	@echo "Build complete: $@"
+
+# Compile source files
+$(OBJ_DIR)/%.o: $(SRC)/%.cpp
+	@echo "Compiling $<..."
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean build files
+clean:
+	@echo "Cleaning..."
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+# Help
+help:
+	@echo "BinMerger Build System"
+	@echo "Available targets:"
+	@echo "  make -f Makefile.linux       - Build Windows executable (default)"
+	@echo "  make -f Makefile.linux clean - Remove build files"
+	@echo "  make -f Makefile.linux help  - Show this help message"
+
+.PHONY: all clean help
